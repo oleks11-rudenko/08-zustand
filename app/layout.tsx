@@ -5,6 +5,7 @@ import 'modern-normalize';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import { getPageUrl } from '@/lib/api';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -19,6 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub - Managing online notes',
     description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
+    url: getPageUrl('/'),
     siteName: 'NoteHub',
     type: 'website',
     images: [

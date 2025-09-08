@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import css from './CreateNote.module.css';
 import NoteForm from '@/components/NoteForm/NoteForm';
+import { getPageUrl } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'NoteHub - Managing online notes',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub - Managing online notes',
     description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
+    url: getPageUrl('/notes/action/create'),
     siteName: 'NoteHub',
     type: 'website',
     images: [

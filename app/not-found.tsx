@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import css from './NotFound.module.css';
+import { getPageUrl } from '@/lib/api';
 
 export const metadata: Metadata = {
   title: 'NoteHub - Managing online notes',
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub - Managing online notes',
     description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
+    url: getPageUrl(''),
     siteName: 'NoteHub',
     type: 'website',
     images: [

@@ -1,6 +1,6 @@
-import { fetchNotes } from '@/lib/api';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { Metadata } from 'next';
+import { fetchNotes, getPageUrl } from '@/lib/api';
 import NotesClient from './Notes.client';
 import { Tag } from '@/types/note';
 
@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: NotesProps): Promise<Metadata
     openGraph: {
       title: 'NoteHub - Managing online notes',
       description: descriptions[slug[0]],
+      url: getPageUrl(`/notes/filter/${slug[0]}`),
       siteName: 'NoteHub',
       type: 'website',
       images: [

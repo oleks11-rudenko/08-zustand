@@ -11,6 +11,12 @@ interface NoteshttpResponse {
   totalPages: number;
 }
 
+export function getPageUrl(currentUrl: string) {
+  const vercelUrl = process.env.VERCEL_URL;
+  const baseUrl = vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000';
+  return `${baseUrl}${currentUrl}`;
+}
+
 export async function fetchNotes(page: number, search: string, tag?: string | undefined) {
   const response = await axios.get<NoteshttpResponse>('notes/', {
     params: {

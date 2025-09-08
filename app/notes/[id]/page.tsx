@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { fetchNoteById } from '@/lib/api';
+import { fetchNoteById, getPageUrl } from '@/lib/api';
 import NoteDetailsClient from './NoteDetails.client';
 
 interface NotePageProps {
@@ -11,18 +11,13 @@ export async function generateMetadata({ params }: NotePageProps): Promise<Metad
   const { id } = await params;
   const note = await fetchNoteById(id);
 
-  const vercelUrl = process.env.VERCEL_URL;
-  const baseUrl = vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000';
-
-  const url = `${baseUrl}/notes/${id}`;
-
   return {
     title: `Note - ${note.title}`,
     description: note.content.slice(0, 30),
     openGraph: {
       title: `Note - ${note.title}`,
       description: note.content.slice(0, 100),
-      url,
+      url: getPageUrl(`/notes/${id}`),
       siteName: 'NoteHub',
       type: 'website',
       images: [
