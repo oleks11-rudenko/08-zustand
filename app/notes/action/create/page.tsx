@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
-import css from './NotFound.module.css';
+import css from './CreateNote.module.css';
+import NoteForm from '@/components/NoteForm/NoteForm';
 
 export const metadata: Metadata = {
   title: 'NoteHub - Managing online notes',
-  description: "Oops! The page you're looking for doesn't exist.",
+  description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
   openGraph: {
     title: 'NoteHub - Managing online notes',
     description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'NoteHub - Managing online notes',
-    description: "Oops! The page you're looking for doesn't exist.",
+    description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -33,11 +34,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NotFound() {
+export default function CreateNote() {
   return (
-    <>
-      <h1 className={css.title}>404 - Page not found</h1>
-      <p className={css.description}>Sorry, the page you are looking for does not exist.</p>
-    </>
+    <main className={css.main}>
+      <div className={css.container}>
+        <h1 className={css.title}>Create note</h1>
+        <NoteForm />
+      </div>
+    </main>
   );
 }
