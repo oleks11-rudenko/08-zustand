@@ -7,37 +7,48 @@ interface NotePageProps {
   params: Promise<{ id: string }>;
 }
 
-export const metadata: Metadata = {
-  title: 'NoteHub - Managing online notes',
-  description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
-  openGraph: {
-    title: 'NoteHub - Managing online notes',
-    description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
-    siteName: 'NoteHub',
-    type: 'website',
-    images: [
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'NoteHub - Managing online notes',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'NoteHub - Managing online notes',
-    description: 'App for creating, filtering and removing notes. Created by @oleks11-rudenko',
-    images: [
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'NoteHub - Managing online notes',
-      },
-    ],
-  },
-};
+export async function generateMetadata({ params }: NotePageProps): Promise<Metadata> {
+  const { id } = await params;
+  const note = await fetchNoteById(id);
+
+  const vercelUrl = process.env.VERCEL_URL;
+  const baseUrl = vercelUrl ? `https://${vercelUrl}` : 'http://localhost:3000';
+
+  const url = `${baseUrl}/notes/${id}`;
+
+  return {
+    title: `Note - ${note.title}`,
+    description: note.content.slice(0, 30),
+    openGraph: {
+      title: `Note - ${note.title}`,
+      description: note.content.slice(0, 100),
+      url,
+      siteName: 'NoteHub',
+      type: 'website',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Note - ${note.title}`,
+      description: note.content.slice(0, 100),
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: note.title,
+        },
+      ],
+    },
+  };
+}
 
 export default async function NoteDetails({ params }: NotePageProps) {
   const { id } = await params;

@@ -1,5 +1,6 @@
 import { fetchNotes } from '@/lib/api';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { Metadata } from 'next';
 import NotesClient from './Notes.client';
 import { Tag } from '@/types/note';
 
@@ -7,7 +8,7 @@ interface NotesProps {
   params: Promise<{ slug: Tag[] }>;
 }
 
-export async function generateMetadata({ params }: NotesProps) {
+export async function generateMetadata({ params }: NotesProps): Promise<Metadata> {
   const { slug } = await params;
   const descriptions = {
     All: 'Browse all your notes in one place. Stay organized and access everything instantly with NoteHub.',

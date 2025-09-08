@@ -15,7 +15,7 @@ export default function NoteForm() {
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setDraft({ ...draft, [event.target.name]: [event.target.value] });
+    setDraft({ ...draft, [event.target.name]: event.target.value });
   };
 
   const { mutate, isPending } = useMutation({
@@ -53,7 +53,7 @@ export default function NoteForm() {
           id="content"
           name="content"
           rows={8}
-          defaultValue={draft.title}
+          defaultValue={draft.content}
           onChange={handleChange}
           className={css.content}
         />
